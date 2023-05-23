@@ -32,7 +32,20 @@ List *listCreate() {
   return temp;
 }
 
-void listPushFront(List *list, int item) {}
+void listPushFront(List *list, int item) {
+  Node *temp = nodeCreate(item);
+
+  if (list->head == NULL || list->tail == NULL) {
+    list->head = temp;
+    list->tail = temp;
+  } else {
+    list->head->prev = temp;
+    temp->next = list->head;
+    list->head = temp;
+  }
+
+  list->len++;
+}
 
 void listPushBack(List *list, int item) {
   Node *temp = nodeCreate(item);
